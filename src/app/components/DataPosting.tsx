@@ -13,7 +13,6 @@ import SharingRecipe from "./SharingRecipe";
 import axios from "axios";
 import { AppDispatch, useAppSelector } from "../redux/store";
 import { useDispatch } from "react-redux";
-import { setTheme } from "../redux/features/theme-slice";
 import { setPosts } from "../redux/features/recipe-slice";
 
 export default function DataPosting() {

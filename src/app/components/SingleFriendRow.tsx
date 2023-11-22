@@ -9,9 +9,7 @@ import { setFriends } from "../redux/features/user-slice";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 const SingleFriendRow = ({ item }: any) => {
-  const proifleChange=()=>{
-    
-  }
+  const proifleChange = () => {};
   const handleAddFriend = async () => {
     const response = await axios.put("/api/users/addfriend", {
       userOwner: item._id,
@@ -23,14 +21,14 @@ const SingleFriendRow = ({ item }: any) => {
   const currentUser = useAppSelector((state) => state.userSlice.user);
   const dispatch = useDispatch<AppDispatch>();
   const friends = currentUser.friendsList;
-  const isFriend = friends.find((friend) => friend._id === item._id);
+  const isFriend = friends.find((friend: any) => friend._id === item._id);
 
   //console.log(item.image);
   return (
     <div className="flex items-center justify-between space-x-4">
       <div className="flex items-center space-x-4">
         <Avatar>
-          <AvatarImage src={item.image} onClick={proifleChange}/>
+          <AvatarImage src={item.image} onClick={proifleChange} />
           <AvatarFallback>PR</AvatarFallback>
         </Avatar>
         <div>
