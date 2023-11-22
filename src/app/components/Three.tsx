@@ -24,7 +24,7 @@ const Three = ({ isProfile }: any) => {
       setLoading(!isLoading);
     };
     fetchingRecipes();
-  });
+  }, []);
   return (
     <div>
       <DataPosting />

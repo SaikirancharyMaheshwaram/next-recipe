@@ -36,7 +36,7 @@ export default function SingleUserAvator({ userId }: any) {
       setUser(res.data.user);
     };
     fetchingUser();
-  },[dispatch]);
+  }, []);
   const handleAddFriend = async () => {
     const response = await axios.put("/api/users/addfriend", {
       userOwner: userId,
