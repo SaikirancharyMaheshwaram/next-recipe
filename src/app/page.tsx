@@ -20,7 +20,7 @@ export default function Home() {
   };
   useEffect(() => {
     fetchingUser();
-  });
+  }, [dispatch]);
   return (
     <main className="w-full">
       <Nav />
