@@ -46,7 +46,11 @@ export default function Signin() {
     }
   };
   const handleGuest = async () => {
-    setUser({ email: "one@gmail.com", password: "one" });
+    const guest = {
+      email: "one@gmail.com",
+      password: "one",
+    };
+    setUser({ ...user, email: guest.email, password: guest.password });
     await onLogin();
   };
   //register logic
@@ -72,7 +76,7 @@ export default function Signin() {
             size="md"
             aria-label="Tabs form"
             selectedKey={selected}
-            onSelectionChange={setSelected}
+            onSelectionChange={() => setSelected}
           >
             <Tab key="login" title="Login">
               <form className="flex flex-col gap-4" onSubmit={onLogin}>
