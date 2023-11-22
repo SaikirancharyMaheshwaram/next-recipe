@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "../redux/store";
 import { setPost } from "../redux/features/recipe-slice";
 
+
 export default function App({ item }: any) {
   const dispatch = useDispatch<AppDispatch>();
   const currentUser = useAppSelector((state) => state.userSlice.user);
@@ -82,17 +83,21 @@ export default function App({ item }: any) {
                 radius="full"
                 variant="light"
               >
-                <RepeatOneIcon width={undefined} height={undefined} />
+                <RepeatOneIcon width={10} height={10} />
               </Button>
-              <Button
-                isIconOnly
-                className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2 "
-                radius="full"
-                variant="light"
-                onClick={FlipCard}
-              >
-                <IoEyeOutline className="text-2xl" />
-              </Button>
+              {item.isTweet ? (
+                ""
+              ) : (
+                <Button
+                  isIconOnly
+                  className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2 "
+                  radius="full"
+                  variant="light"
+                  onClick={FlipCard}
+                >
+                  <IoEyeOutline className="text-2xl" />
+                </Button>
+              )}
             </div>
           </CardBody>
         </Card>

@@ -11,7 +11,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader,
 } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -76,7 +75,7 @@ export default function Signin() {
             size="md"
             aria-label="Tabs form"
             selectedKey={selected}
-            onSelectionChange={() => setSelected}
+            onSelectionChange={(newKey: any) => setSelected(newKey)}
           >
             <Tab key="login" title="Login">
               <form className="flex flex-col gap-4" onSubmit={onLogin}>

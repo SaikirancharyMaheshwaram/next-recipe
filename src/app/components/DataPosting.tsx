@@ -26,7 +26,7 @@ export default function DataPosting() {
     instructions: "",
     imageUrl: "",
     cookingTime: 0,
-    isTweet:true,
+    isTweet: true,
     userOwner: currentUser._id,
   });
   const handleCreateRecipe = async () => {
@@ -37,7 +37,7 @@ export default function DataPosting() {
       instructions: recipe.instructions,
       imageUrl: recipe.imageUrl,
       cookingTime: recipe.cookingTime,
-      isTweet:true,
+      isTweet: recipe.isTweet,
       userOwner: currentUser._id,
     });
     console.log(response);
@@ -88,7 +88,7 @@ export default function DataPosting() {
               onPress={() => setIsFollowed(!isFollowed)}
               onClick={handleCreateRecipe}
             >
-              {isFollowed ? "Unfollow" : "Share"}
+              {isFollowed ? "share again" : "Share"}
             </Button>
             <SharingRecipe />
           </div>
