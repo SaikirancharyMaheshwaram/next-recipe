@@ -1,5 +1,14 @@
-import React from "react";
-export const HeartIcon = ({
+import React, { FC, SVGProps } from "react";
+
+interface HeartIconProps extends SVGProps<SVGSVGElement> {
+  size?: number;
+  width?: number;
+  height?: number;
+  strokeWidth?: number;
+  fill?: string;
+}
+
+export const HeartIcon: FC<HeartIconProps> = ({
   size = 24,
   width,
   height,
