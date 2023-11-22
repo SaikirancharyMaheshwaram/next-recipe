@@ -22,7 +22,7 @@ export default function SingleUserAvator({ userId }: any) {
   const dispatch = useDispatch<AppDispatch>();
   const friends = currentUser.friendsList;
   //checking the posts owner with current user friendlist item
-  const isFriend = friends.find((friend) => friend._id === userId);
+  const isFriend = friends.find((friend: any) => friend._id === userId);
   const [user, setUser] = useState({
     username: "",
     image: "",
@@ -36,7 +36,7 @@ export default function SingleUserAvator({ userId }: any) {
       setUser(res.data.user);
     };
     fetchingUser();
-  }, []);
+  });
   const handleAddFriend = async () => {
     const response = await axios.put("/api/users/addfriend", {
       userOwner: userId,

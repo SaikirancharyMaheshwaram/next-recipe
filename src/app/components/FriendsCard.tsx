@@ -62,7 +62,7 @@ export function FriendsCard(): JSX.Element {
 
     // Call fetchFriends only once on mount
     fetchFriends();
-  }, [currentUser._id]);
+  });
 
   const filteredFriends = currentUser.friendsList.filter((friend: any) => {
     console.log(friend);

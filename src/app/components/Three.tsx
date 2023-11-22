@@ -23,13 +23,13 @@ const Three = ({ isProfile }: any) => {
       dispatch(setPosts(res.data.recipes));
       setLoading(!isLoading);
     };
-     fetchingRecipes();
-  }, []);
+    fetchingRecipes();
+  });
   return (
     <div>
       <DataPosting />
       {isLoading ? (
-        recipeList?.map((item) => <Recipe item={item} />)
+        recipeList?.map((item) => <Recipe item={item} key={item._id} />)
       ) : (
         <SkeletonLoader />
       )}
