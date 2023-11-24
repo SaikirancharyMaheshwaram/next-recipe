@@ -42,10 +42,20 @@ export default function DataPosting() {
     });
     console.log(response);
     dispatch(setPosts(response.data.posts));
+    setRecipe({
+      name: "Thought...",
+      ingredients: [],
+      des: "",
+      instructions: "",
+      imageUrl: "",
+      cookingTime: 0,
+      isTweet: true,
+      userOwner: currentUser._id,
+    });
   };
 
   return (
-    <div className="md:max-w-[600px] my-4   top-16  max-sm:w-full">
+    <div className="max-md:max-w-[600px] my-4   top-16  max-sm:w-full">
       <Card className="md:max-w-[600px] my-4 max-sm:w-full">
         <CardHeader className="justify-between">
           <div className="flex gap-5">

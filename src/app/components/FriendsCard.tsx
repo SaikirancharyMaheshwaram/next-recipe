@@ -35,24 +35,26 @@ interface ApiResponse {
   formattedFriends: Friend[];
 }
 
-export function FriendsCard(): JSX.Element {
+export function FriendsCard({ userId }: any): JSX.Element {
   const currentUser = useAppSelector((state) => state.userSlice.user);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const fetchFriends = async (): Promise<void> => {
+    const fetchFriends = async () => {
       try {
-        const response = await axios.post<ApiResponse>(
-          "/api/users/getUserFriends",
-          {
-            email: currentUser._id,
-          }
-        );
+        console.log("here");
+        console.log(userId);
+        const response = await axios.post("/api/users/getUserFriends", {
+          email: userId,
+        });
+        console.log(response.data);
+        console.log("here");
 
         dispatch(setFriends(response.data.formattedFriends));
-      } catch (error) {
+      } catch (error: any) {
+        console.log("helre", error.message);
         console.error("Error fetching friends:", error);
       } finally {
         // Set isLoading to true once the data is loaded or an error occurs
@@ -62,7 +64,7 @@ export function FriendsCard(): JSX.Element {
 
     // Call fetchFriends only once on mount
     fetchFriends();
-  },[]);
+  }, [userId]);
 
   const filteredFriends = currentUser.friendsList.filter((friend: any) => {
     console.log(friend);
@@ -105,3 +107,4 @@ export function FriendsCard(): JSX.Element {
     </Card>
   );
 }
+export default FriendsCard;
