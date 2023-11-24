@@ -26,12 +26,16 @@ const Three = ({ isProfile }: any) => {
     fetchingRecipes();
   }, []);
   return (
-    <div>
+    <div className="">
       <DataPosting />
       {isLoading ? (
         recipeList?.map((item) => <Recipe item={item} key={item._id} />)
       ) : (
-        <SkeletonLoader />
+        <div>
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+        </div>
       )}
     </div>
   );

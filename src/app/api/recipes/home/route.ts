@@ -1,17 +1,12 @@
 import { connect } from "@/dbConfig/dbConfig";
-import Recipe from "@/models/recipeModel"
+import Recipe from "@/models/recipeModel";
 import { NextRequest, NextResponse } from "next/server";
-connect()
-
-export async function GET(){
-
-   try {
-    const recipes=await Recipe.find({});
-    return NextResponse.json({recipes});
-    
-   } catch (error:any) {
-    return NextResponse.json({error:error.message},{status:500})
-    
-   }
-
+connect();
+export async function GET(request: NextRequest) {
+  try {
+    const recipes = await Recipe.find({});
+    return NextResponse.json({ recipes });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }
