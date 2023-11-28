@@ -33,7 +33,7 @@ const Three = ({ isProfile }: any) => {
     }
   }, []);
   return (
-    <div className="">
+    <div className="max-sm:w-full">
       {sessionUser === changedUser ? "" : <DataPosting />}
 
       {isLoading ? (
@@ -43,6 +43,7 @@ const Three = ({ isProfile }: any) => {
           <SkeletonLoader />
           <SkeletonLoader />
           <SkeletonLoader />
+          
         </div>
       )}
     </div>

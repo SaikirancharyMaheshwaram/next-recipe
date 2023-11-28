@@ -68,7 +68,7 @@ export default function App({ item }: any) {
       {/* ReactCardFlip is used for creating a card with a flip effect */}
       <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
         {/* Front side of the card */}
-        <Card className="py-4 my-4 min-w-[600px] ">
+        <Card className="py-4  max-md:max-w-[600px] my-4 max-sm:w-full ">
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <div className="w-full">
               {/* Display user avatar */}

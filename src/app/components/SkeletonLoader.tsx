@@ -1,11 +1,14 @@
 import React from "react";
-import {Card, Skeleton} from "@nextui-org/react";
+import { Card, Skeleton } from "@nextui-org/react";
 
 export default function SkeletonLoader() {
   return (
-    <Card className="w-[600px] space-y-5 p-4 my-4" radius="lg">
+    <Card
+      className="max-md:w-[600px] space-y-5 p-4 my-4 max-sm:w-full"
+      radius="lg"
+    >
       <Skeleton className="rounded-lg">
-        <div className="h-[500px] rounded-lg bg-default-300"></div>
+        <div className="max-md:h-[500px] rounded-lg bg-default-300 max-sm:h-80"></div>
       </Skeleton>
       <div className="space-y-3">
         <Skeleton className="w-3/5 rounded-lg">
@@ -14,7 +17,7 @@ export default function SkeletonLoader() {
         <Skeleton className="w-4/5 rounded-lg">
           <div className="h-3 w-4/5 rounded-lg bg-default-200"></div>
         </Skeleton>
-        <Skeleton className="w-2/5 rounded-lg">  
+        <Skeleton className="w-2/5 rounded-lg">
           <div className="h-3 w-2/5 rounded-lg bg-default-300"></div>
         </Skeleton>
       </div>

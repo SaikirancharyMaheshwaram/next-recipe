@@ -21,23 +21,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>
-          <div className="">
+        <main className="w-full">
+          <ReduxProvider>
             <Toaster />
-            <main className="">
-              <Providers>
-                <ThemeProvider
-                  attribute="class"
-                  defaultTheme="system"
-                  enableSystem
-                  disableTransitionOnChange
-                >
-                  {children}
-                </ThemeProvider>
-              </Providers>
-            </main>
-          </div>
-        </ReduxProvider>
+            <Providers>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                {children}
+              </ThemeProvider>
+            </Providers>
+          </ReduxProvider>
+        </main>
       </body>
     </html>
   );

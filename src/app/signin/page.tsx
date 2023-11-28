@@ -72,8 +72,8 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex flex-col w-full  items-center min-w-full bg-black">
-      <Card className="max-w-full w-[340px] ">
+    <div className="flex flex-col w-full  items-center min-w-full ">
+      <Card className="max-w-full w-[340px] relative top-8">
         <CardBody className="overflow-hidden">
           <Tabs
             fullWidth

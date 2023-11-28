@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <main className="w-full">
       <Nav />
-      <div className="flex gap-6  max-sm:flex-col p-4 justify-around">
+      <div className="flex gap-6  max-sm:flex-col p-4 justify-around max-sm:items-center">
         <UserProfile />
         <Three isProfile={false} />
         <FriendsCard userId={currentUser._id} />
