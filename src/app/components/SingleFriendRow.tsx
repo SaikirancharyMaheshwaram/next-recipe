@@ -5,10 +5,14 @@ import { IoPersonAddOutline } from "react-icons/io5";
 import { HiOutlineUserRemove } from "react-icons/hi";
 import { AppDispatch, useAppSelector } from "../redux/store";
 import { useDispatch } from "react-redux";
-import { setFriends } from "../redux/features/user-slice";
+import { setFriends, setUser } from "../redux/features/user-slice";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
+import { GiLaurelCrown } from "react-icons/gi";
+import { setPosts } from "../redux/features/recipe-slice";
 const SingleFriendRow = ({ item }: any) => {
+  const sessionUser = useAppSelector((state) => state.userSlice.randomUser);
+  const changedUser = useAppSelector((state) => state.userSlice.user);
   const proifleChange = () => {};
   const handleAddFriend = async () => {
     const response = await axios.put("/api/users/addfriend", {
@@ -23,20 +27,39 @@ const SingleFriendRow = ({ item }: any) => {
   const friends = currentUser.friendsList;
   const isFriend = friends.find((friend: any) => friend._id === item._id);
 
+  const fetchRandomUser = async () => {
+    const response = await axios.get(`api/recipes/userRecipes/${item._id}`);
+    dispatch(setPosts(response.data.recipes));
+    const res = await axios.post("/api/users/singleUser", {
+      email: item._id,
+    });
+    dispatch(setUser(res.data.user));
+  };
+
   //console.log(item.image);
   return (
     <div className="flex items-center justify-between space-x-4">
       <div className="flex items-center space-x-4">
-        <Avatar>
+        <Avatar
+          onClick={fetchRandomUser}
+          className="cursor-pointer hover:scale-105"
+        >
           <AvatarImage src={item.image} onClick={proifleChange} />
           <AvatarFallback>PR</AvatarFallback>
         </Avatar>
         <div>
-          <p className="text-sm font-medium leading-none">{item.username}</p>
+          <p
+            className="text-sm font-medium leading-none cursor-pointer hover:scale-105"
+            onClick={fetchRandomUser}
+          >
+            {item.username}
+          </p>
           <p className="text-sm text-muted-foreground">{item.occupation}</p>
         </div>
       </div>
-      {isFriend ? (
+      {sessionUser._id !== changedUser._id ? (
+        <GiLaurelCrown className="text-2xl" />
+      ) : isFriend ? (
         <Button
           isIconOnly
           className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2 relative top-2  "

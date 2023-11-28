@@ -1,22 +1,20 @@
+import { getDataFromToken } from "@/app/utils/getDataFromToken";
 import { connect } from "@/dbConfig/dbConfig";
-import Recipe from "@/models/recipeModel"
+import Recipe from "@/models/recipeModel";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
-connect()
+connect();
 
-export async function POST(request:NextRequest){
+export async function GET(request: NextRequest) {
+  try {
+    const userFromHelper: any = getDataFromToken(request);
+    const userId = userFromHelper.id;
 
-   try {
-    const body=await request.json();
-    const {userId}=body;
-    //sending the user id 
-    const recipes=await Recipe.find({userOwner:userId});
+    //sending the user id
+    const recipes = await Recipe.find({ userOwner: userId });
     console.log(recipes);
-    return NextResponse.json({recipes});
-    
-   } catch (error:any) {
-    return NextResponse.json({error:error.message},{status:500})
-    
-   }
-
+    return NextResponse.json({ recipes });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }

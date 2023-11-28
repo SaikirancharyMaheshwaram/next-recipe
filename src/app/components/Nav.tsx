@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -11,34 +11,49 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  Button,
 } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ModeToggle } from "./ui/toggle-mode";
-
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
 import { AppDispatch, useAppSelector } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { setPosts } from "../redux/features/recipe-slice";
+import { ModeToggle } from "./ui/toggle-mode";
+import { setFriends, setUser } from "../redux/features/user-slice";
 
-export default function Nav() {
-  const router = useRouter();
-  const currentUser = useAppSelector((state) => state.userSlice.user);
-  const recipes = useAppSelector((state) => state.recipeSlice.posts);
+interface NavProps {}
+
+export const Nav: React.FC<NavProps> = () => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const router = useRouter() as any;
   const dispatch = useDispatch<AppDispatch>();
+  const currentUser = useAppSelector((state) => state.userSlice.randomUser);
   const onLogout = async () => {
     const logout = await axios.get("/api/users/logout");
     console.log(logout);
     router.push("/signin");
   };
-  const handleMyPosts = async () => {
-    const userRecipes = recipes.filter(
-      (recipe: any) => recipe.userOwner === currentUser._id
-    );
-    dispatch(setPosts(userRecipes));
+  const handleHome = async () => {
+    const recipes = await axios.get("/api/recipes/home");
+    dispatch(setUser(currentUser));
+    dispatch(setPosts(recipes.data.recipes));
+    dispatch(setFriends(currentUser.friendsList));
   };
+  const handleMyposts = async () => {
+    const res = await axios.get(`api/recipes/userRecipes`);
+    dispatch(setPosts(res.data.recipes));
+  };
+  const handleSavedPosts = async () => {
+    const response = await axios.post("/api/recipes/savedRecipes", {
+      userId: currentUser._id,
+    });
+    console.log(response.data.recipes);
+    dispatch(setPosts(response.data.recipes));
+  };
+
   return (
     <Navbar isBordered maxWidth="full" className="max-sm:w-full">
       <NavbarContent justify="start">
@@ -57,14 +72,24 @@ export default function Nav() {
           </Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-3">
-          <NavbarItem>
-            <Link color="foreground" href={"/myposts"}>
-              Myposts
+          <NavbarItem className="hover:scale-105">
+            <Link color="foreground" href={""} onClick={handleMyposts}>
+              {"Myposts"}
             </Link>
           </NavbarItem>
-          <NavbarItem isActive>
-            <Link href="#" aria-current="page" color="foreground">
+          <NavbarItem className="hover:scale-105">
+            <Link
+              href="#"
+              aria-current="page"
+              color="foreground"
+              onClick={handleSavedPosts}
+            >
               SavedPosts
+            </Link>
+          </NavbarItem>
+          <NavbarItem className="hover:scale-105">
+            <Link href="" onClick={handleHome}>
+              home
             </Link>
           </NavbarItem>
         </NavbarContent>
@@ -83,6 +108,8 @@ export default function Nav() {
           size="sm"
           startContent={<CiSearch size={18} />}
           type="search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
@@ -111,4 +138,5 @@ export default function Nav() {
       </NavbarContent>
     </Navbar>
   );
-}
+};
+export default Nav;

@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { setCount, setPosts } from "../redux/features/recipe-slice";
 
 const Three = ({ isProfile }: any) => {
+  const sessionUser = useAppSelector((state) => state.userSlice.randomUser);
+  const changedUser = useAppSelector((state) => state.userSlice.user);
   const recipeList = useAppSelector((state) => state.recipeSlice.posts);
   const currentUser = useAppSelector((state) => state.userSlice.user);
   const dispatch = useDispatch<AppDispatch>();
@@ -19,15 +21,21 @@ const Three = ({ isProfile }: any) => {
       setLoading(!isLoading);
     };
     const fetchUserRecipes = async () => {
-      const res = await axios.get(`api/recipes/userRecipes/${currentUser._id}`);
+      const res = await axios.get(`api/recipes/userRecipes`);
       dispatch(setPosts(res.data.recipes));
       setLoading(!isLoading);
     };
-    fetchingRecipes();
+
+    if (isProfile === true) {
+      fetchUserRecipes();
+    } else {
+      fetchingRecipes();
+    }
   }, []);
   return (
     <div className="">
-      <DataPosting />
+      {sessionUser === changedUser ? "" : <DataPosting />}
+
       {isLoading ? (
         recipeList?.map((item) => <Recipe item={item} key={item._id} />)
       ) : (

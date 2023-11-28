@@ -16,7 +16,9 @@ import { useDispatch } from "react-redux";
 import { setPosts } from "../redux/features/recipe-slice";
 
 export default function DataPosting() {
-  const currentUser = useAppSelector((state) => state.userSlice.user);
+  const currentUser = useAppSelector((state) => state.userSlice.randomUser);
+  const sessionUser = useAppSelector((state) => state.userSlice.randomUser);
+  const changedUser = useAppSelector((state) => state.userSlice.user);
   const dispatch = useDispatch<AppDispatch>();
   const [isFollowed, setIsFollowed] = React.useState(false);
   const [recipe, setRecipe] = React.useState({

@@ -15,25 +15,36 @@ import {
 import { AppDispatch, useAppSelector } from "../redux/store";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setFriends } from "../redux/features/user-slice";
+import { setFriends, setUser } from "../redux/features/user-slice";
+import { setPosts } from "../redux/features/recipe-slice";
 
 export default function SingleUserAvator({ userId }: any) {
   const currentUser = useAppSelector((state) => state.userSlice.user);
+  const sessionUser = useAppSelector((state) => state.userSlice.randomUser);
+  const changedUser = useAppSelector((state) => state.userSlice.user);
   const dispatch = useDispatch<AppDispatch>();
   const friends = currentUser.friendsList;
   //checking the posts owner with current user friendlist item
   const isFriend = friends.find((friend: any) => friend._id === userId);
-  const [user, setUser] = useState({
+  const [user, setLocalUser] = useState({
     username: "",
     image: "",
     location: "",
   });
+  const fetchRandomUser = async () => {
+    const response = await axios.get(`api/recipes/userRecipes/${userId}`);
+    dispatch(setPosts(response.data.recipes));
+    const res = await axios.post("/api/users/singleUser", {
+      email: userId,
+    });
+    dispatch(setUser(res.data.user));
+  };
   useEffect(() => {
     const fetchingUser = async () => {
       const res = await axios.post("/api/users/singleUser", {
         email: userId,
       });
-      setUser(res.data.user);
+      setLocalUser(res.data.user);
     };
     fetchingUser();
   }, []);
@@ -45,7 +56,7 @@ export default function SingleUserAvator({ userId }: any) {
     //toast.success(response.data);
     dispatch(setFriends(response.data.formattedFriends));
   };
-  const isCurrentUser = currentUser._id === userId;
+  const isCurrentUser = sessionUser._id === userId;
 
   return (
     <div className="flex justify-between  w-full">
@@ -55,8 +66,10 @@ export default function SingleUserAvator({ userId }: any) {
         avatarProps={{
           src: user.image,
         }}
+        onClick={fetchRandomUser}
+        className="hover:cursor-pointer hover:scale-105"
       />
-      {isCurrentUser ? (
+      {isCurrentUser || sessionUser._id !== changedUser._id ? (
         <Button
           isIconOnly
           className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2 relative top-2  "

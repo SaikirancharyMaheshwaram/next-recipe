@@ -20,7 +20,8 @@ import { AppDispatch, useAppSelector } from "../redux/store";
 
 export default function UserProfile() {
   const currentUser = useAppSelector((state) => state.userSlice.user);
-  console.log(currentUser);
+  const currentRandomUser=useAppSelector((state)=>state.userSlice.randomUser)
+  //console.log(currentUser);
   return (
     <Card className="max-w-[320px] h-fit my-4 sticky top-16 max-sm:w-full max-sm:static">
       <CardHeader className="flex gap-3 justify-evenly">
