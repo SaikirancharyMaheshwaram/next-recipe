@@ -10,7 +10,6 @@ import {
   CardFooter,
   Avatar,
 } from "@nextui-org/react";
-import { EyeFilledIcon } from "../components/ui/EyeFilledIcon";
 import Image from "next/image";
 import moment from "moment";
 import { HeartIcon } from "./HeartIcon";
@@ -35,7 +34,6 @@ export default function App({ item }: any) {
 
   // Local state
   const [isFlipped, setIsFlipped] = React.useState(false);
-  const [count, setCount] = React.useState(0);
 
   // Function to flip the card
   function FlipCard() {

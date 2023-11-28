@@ -10,7 +10,16 @@ type InitialState = {
     friendsList: Array<string>;
     profileCount: number;
   };
-  edit: boolean;
+  randomUser: {
+    _id: string;
+    username: string;
+    email: string;
+    image: string;
+    location: string;
+    occupation: string;
+    friendsList: Array<string>;
+    profileCount: number;
+  };
 };
 const initialState: InitialState = {
   user: {
@@ -23,7 +32,16 @@ const initialState: InitialState = {
     friendsList: [],
     profileCount: 0,
   },
-  edit: false,
+  randomUser: {
+    _id: "",
+    username: "",
+    email: "",
+    image: "",
+    location: "",
+    occupation: "",
+    friendsList: [],
+    profileCount: 0,
+  },
 };
 
 export const user = createSlice({
@@ -38,8 +56,12 @@ export const user = createSlice({
       state.user.friendsList = action.payload;
       return;
     },
+    setLoginUser: (state, action: PayloadAction<any>) => {
+      state.randomUser = action.payload;
+      return;
+    },
   },
 });
 
-export const { setUser, setFriends } = user.actions;
+export const { setUser, setFriends, setLoginUser } = user.actions;
 export default user.reducer;

@@ -45,12 +45,17 @@ export default function Signin() {
     }
   };
   const handleGuest = async () => {
-    const guest = {
+    setLoading(true);
+    const response = await axios.post("/api/users/signin", {
       email: "one@gmail.com",
       password: "one",
-    };
-    setUser({ ...user, email: guest.email, password: guest.password });
-    await onLogin();
+      username: "",
+      image: "",
+      location: "",
+      occupation: "",
+    });
+    console.log(response.data.message, response.data);
+    router.push("/");
   };
   //register logic
   const onSignup = async () => {

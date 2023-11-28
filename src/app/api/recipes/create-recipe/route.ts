@@ -15,12 +15,12 @@ interface Recipe {
 export async function POST(request: NextRequest) {
   try {
     const body: Recipe = await request.json();
-     console.log(body);
+    console.log(body);
     const newRecipe = await new Recipe(body);
     // console.log(newRecipe);
     // console.log(newRecipe.ingredients);
     const response = await newRecipe.save();
-    const posts = await Recipe.find();
+    const posts = await Recipe.find().sort({ createdAt: -1 });
     if (response) {
       return NextResponse.json(
         { message: `${body.name} created successfully`, response, posts },

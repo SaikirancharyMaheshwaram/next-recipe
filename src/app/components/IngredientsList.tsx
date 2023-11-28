@@ -8,7 +8,6 @@ import {
   Selection,
 } from "@nextui-org/react";
 import { ListboxWrapper } from "./ListboxWrapper";
-import { users } from "./data";
 
 interface Ingredient {
   _id: string;
@@ -36,14 +35,7 @@ export default function IngredientsList({ items }: IngredientsListProps) {
         className="w-full flex py-0.5 px-2 gap-1 "
         orientation="horizontal"
       >
-        {arrayValues.map((value) => {
-          const user = users.find((user) => `${user.id}` === `${value}`);
-          // Make sure user is found before rendering
-          if (user) {
-            return <Chip key={value}>{user.name}</Chip>;
-          }
-          return null;
-        })}
+        {}
       </ScrollShadow>
     );
   }, [arrayValues.length]);

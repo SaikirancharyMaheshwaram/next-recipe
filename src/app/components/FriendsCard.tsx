@@ -44,13 +44,13 @@ export function FriendsCard({ userId }: any): JSX.Element {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        console.log("here");
-        console.log(userId);
+        //console.log("here");
+        //console.log(userId);
         const response = await axios.post("/api/users/getUserFriends", {
-          email: userId,
+          email: currentUser._id,
         });
-        console.log(response.data);
-        console.log("here");
+        // console.log(response.data);
+        //console.log("here");
 
         dispatch(setFriends(response.data.formattedFriends));
       } catch (error: any) {
@@ -71,7 +71,7 @@ export function FriendsCard({ userId }: any): JSX.Element {
     // Use return to actually filter the friends based on the username
     return friend.username?.toLowerCase().includes(searchTerm.toLowerCase());
   });
-  console.log(currentUser.friendsList);
+  //console.log(currentUser.friendsList);
 
   return (
     <Card className="h-fit my-4 sticky top-16 min-w-[217px] w-fit">
