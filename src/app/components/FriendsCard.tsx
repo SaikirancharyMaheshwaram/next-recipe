@@ -74,7 +74,7 @@ export function FriendsCard({ userId }: any): JSX.Element {
   //console.log(currentUser.friendsList);
 
   return (
-    <Card className="h-fit my-4 sticky top-16 min-w-[217px] w-fit">
+    <Card className="h-fit my-4 sticky top-16 min-w-[217px] w-fit py-4    max-sm:w-full">
       <CardHeader>
         <CardTitle>Friends</CardTitle>
         <CardDescription>Anyone with the link can view.</CardDescription>

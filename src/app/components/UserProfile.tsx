@@ -23,7 +23,7 @@ export default function UserProfile() {
   const currentRandomUser=useAppSelector((state)=>state.userSlice.randomUser)
   //console.log(currentUser);
   return (
-    <Card className="max-w-[320px] h-fit my-4 sticky top-16 max-sm:w-full max-sm:static">
+    <Card className="max-w-[320px] h-fit my-4 sticky top-16 max-sm:static py-4  max-md:max-w-[600px]  max-sm:w-full">
       <CardHeader className="flex gap-3 justify-evenly">
         <Profilepic />
 
