@@ -96,7 +96,7 @@ export const Nav: React.FC<NavProps> = () => {
       </NavbarContent>
 
       <NavbarContent as="div" className="items-center" justify="end">
-        <Input
+        {/* <Inputj
           classNames={{
             base: "max-w-full sm:max-w-[10rem] h-10",
             mainWrapper: "h-full",
@@ -110,7 +110,7 @@ export const Nav: React.FC<NavProps> = () => {
           type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        /> */}
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -128,7 +128,20 @@ export const Nav: React.FC<NavProps> = () => {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{currentUser?.email}</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
+            {/* <DropdownItem key="settings">My Settings</DropdownItem> */}
+            <DropdownItem key="myposts" color="primary" onClick={handleMyposts}>
+              My Posts
+            </DropdownItem>
+            <DropdownItem key="home" color="warning" onClick={handleHome}>
+              Home
+            </DropdownItem>
+            <DropdownItem
+              key="savedPosts"
+              color="success"
+              onClick={handleSavedPosts}
+            >
+              Saved Posts
+            </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={onLogout}>
               Log Out
             </DropdownItem>
